@@ -66,7 +66,7 @@ const CooperationPage: React.FC = () => {
       onConfirm={onClose}
       message={'Delete Successfully.'}
       />
-    <section className="text-gray-700 body-font overflow-hidden">
+    <section className="text-gray-700 body-font overflow-hidden opacity-0 animate-fadeIn">
       <div className="container px-5 py-24 mx-auto">
         <div
           onClick={handleGoBack}

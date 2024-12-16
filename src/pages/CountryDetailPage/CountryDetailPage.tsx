@@ -76,7 +76,7 @@ const CountryDetailPage: React.FC = () => {
       onConfirm={onClose}
       message={messageAlreadyOffered ? messageAlreadyOffered : 'Successfully offer cooperation.'}
       />
-    <section className="text-gray-700 body-font overflow-hidden">
+    <section className="text-gray-700 body-font overflow-hidden opacity-0 animate-fadeIn">
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div
