@@ -10,14 +10,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: url("../src/images/bg-header-desktop.png");
+  background-image: url("../src/assets/images/bg-header-desktop.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 @media (max-width: 576px) {
   body {
-    background-image: url("../src/images/bg-header-mobile.png");
+    background-image: url("../src/assets/images/bg-header-mobile.png");
     background-repeat: no-repeat;
     background-size: contain;
   }

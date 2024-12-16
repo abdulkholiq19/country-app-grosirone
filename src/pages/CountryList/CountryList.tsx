@@ -40,8 +40,6 @@ const CountryList: React.FC = () => {
     navigate('/cooperation');
   }
 
-  
-
   return (
     <>
     <div className="flex justify-center">

@@ -12,12 +12,13 @@ const CountryDetailPage: React.FC = () => {
   const cooperationSelector = useSelector((state: RootState) => state.cooperation.cooperation);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isModalSuccess, setIsModalSuccess] = useState<boolean>(false);
+  const [isModalError, setIsModalError] = useState<boolean>(false);
   const [messageAlreadyOffered, setMessageAlreadyOffered] = useState<string>("");
 
   const navigate = useNavigate(); 
   const { id } = useParams();
   const [country, setCountry] = useState<Country | null>(null);
-  const isCooporation =  cooperationSelector.find((el) => el.cca3 === id)
+  const isCooperation =  cooperationSelector.find((el) => el.cca3 === id)
 
   useEffect(() => {
     const getCountry = async () => {
@@ -38,19 +39,26 @@ const CountryDetailPage: React.FC = () => {
   }
 
   const confirmCoperation = () => {
+    const isProbability = Math.random() > 0.5; 
+    
     const success = cooperationSelector.find((el) => el.cca3 === country?.cca3)
 
-    if(country !== null) dispatch(addCooperation(country));
-    if (success) {
-      setIsModalSuccess(true)
-      setMessageAlreadyOffered("You have offered cooperation to this country.")
+    if(isProbability){
+      if (success) {
+        setIsModalSuccess(true)
+        setMessageAlreadyOffered("You have offered cooperation to this country.")
+      } else {
+        if(country !== null) dispatch(addCooperation(country));
+        
+        setIsModalOpen(false)
+        setIsModalSuccess(true)
+        setTimeout(() => {
+          setIsModalSuccess(false)
+          handleGoBack()
+        }, 1000)
+      }
     } else {
-      setIsModalOpen(false)
-      setIsModalSuccess(true)
-      setTimeout(() => {
-        setIsModalSuccess(false)
-        handleGoBack()
-      }, 2000)
+      setIsModalError(true)
     }
   }
 
@@ -58,6 +66,7 @@ const CountryDetailPage: React.FC = () => {
     setIsModalSuccess(false)
     setIsModalOpen(false)
     handleGoBack()
+    setIsModalError(false)
   }
 
   return (
@@ -75,6 +84,13 @@ const CountryDetailPage: React.FC = () => {
       onClose={onClose}
       onConfirm={onClose}
       message={messageAlreadyOffered ? messageAlreadyOffered : 'Successfully offer cooperation.'}
+      />
+    <ModalConfirmation
+      isModal='error'
+      isOpen={isModalError}
+      onClose={onClose}
+      onConfirm={onClose}
+      message={`Cooperation with the ${country.name.common} state failed. Please try again!`}
       />
     <section className="text-gray-700 body-font overflow-hidden opacity-0 animate-fadeIn">
       <div className="container px-5 py-24 mx-auto">
@@ -102,7 +118,7 @@ const CountryDetailPage: React.FC = () => {
             </div>
             <div>
               <div className='w-full flex justify-end items-start'>
-                <button onClick={offerCooperation} className={`bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-8 ${isCooporation !== undefined ? 'cursor-not-allowed opacity-50' : 'hover:bg-gray-600'}`} disabled={isCooporation !== undefined}>Offer Cooperation</button>
+                <button onClick={offerCooperation} className={`bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-8 ${isCooperation !== undefined ? 'cursor-not-allowed opacity-50' : 'hover:bg-gray-600'}`} disabled={isCooperation !== undefined}>Offer Cooperation</button>
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../app/store';
 import { deleteCooperation } from '../../app/cooperationSlice';
 import ModalConfirmation from '../../components/ModalConfirmation';
+import CooperationSvg from '../../assets/svgs/CooperationSvg';
 
 const CooperationPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -78,10 +79,15 @@ const CooperationPage: React.FC = () => {
           <span className="ml-1 font-bold text-lg">Back</span>
         </div>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">Cooperation List</p>
-        <div className="mt-4">
+        <div className="py-6">
           {cooperatingCountries.length === 0 ? (
             <>
-            <p>No cooperation yet.</p>
+            <div className='flex justify-center opacity-50'>
+              <div className='flex flex-col items-center max-w-sm'>
+                <CooperationSvg />
+                <p className='text-xl font-semibold opacity-0 animate-fadeIn'>No cooperation yet.</p>
+              </div>
+            </div>
             </>
           ) : (
             cooperatingCountries.map((country, index) => (
