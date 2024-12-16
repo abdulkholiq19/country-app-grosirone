@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CountryList from './pages/CountryList/CountryList';
+import CountryDetailPage from './pages/CountryDetailPage/CountryDetailPage';
+import CooperationPage from './pages/CooperationPage/CooperationPage';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="min-h-screen p-4 bg-cover bg-center h-scree" >
+        <Routes>
+          <Route path="/" element={<CountryList />} />
+          <Route path="/country/:id" element={<CountryDetailPage />} />
+          <Route path="/cooperation" element={<CooperationPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
